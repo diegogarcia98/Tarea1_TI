@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: postgres
+  password: 84138085
+  pool: 5
+
+production:
+  <<: *default
+  database: t1_ti_production
+
+development:
+  <<: *default
+  database: t1_ti_development
+
+test:
+  <<: *default
+  database: t1_ti_test

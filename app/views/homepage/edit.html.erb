@@ -1,0 +1,43 @@
+<%= form_tag "/search" do%>
+      <%= text_field_tag :keyword, params[:keyword]%>
+      <%= submit_tag "Buscar", :name => nil%>
+<% end %>
+
+</div>
+    
+    <h1>INFORMACIÓN DE <%=@character.upcase%></h1>
+
+    <%= image_tag @result[0]["img"] %> 
+    <h2>ALIAS: <%= @result[0]["nickname"]%></h2>
+    <h2>OCUPACIÓN: <%= @ocupaciones%></h2>
+    <h2>STATUS: <%= @result[0]["status"]%></h2>
+    <h2>FRASES FAMOSAS:</h2>
+    <% @quotes.each do |cita| %>
+            <h2>"<%= cita["quote"]%>"</h2>
+    <% end %>
+    <h2>INTERPRETADO/A POR: <%=@result[0]["portrayed"]%></h2>
+    <h2>TEMPORADAS EN LAS QUE PARTICIPA EN BREAKING BAD:</h2>
+    <% if @seasons_bb.length() >0 %>
+        <% @seasons_bb.each do |season| %>
+                <%= button_to "Temporada #{season.to_s}", episodios_bb_path(season, 'bb')%>
+        <% end %>
+    <% else %>
+        <h2> - ¡¡EL PERSONAJE NO APARECE EN ESTA SERIE!!</h2>
+    <% end %>
+    <h2>TEMPORADAS EN LAS QUE PARTICIPA EN BETTER CALL SAUL:</h2>
+    <% if @seasons_bcs.length() >0 %>
+        <% @seasons_bcs.each do |season| %>
+                <%= button_to "Temporada #{season.to_s}", episodios_bcs_path(season, 'bcs')%>
+        <% end %>
+    <% else %>
+        <h2> - ¡¡EL PERSONAJE NO APARECE EN ESTA SERIE!!</h2>
+    <% end %>
+
+    
+</div>
+
+
+<h2><%= button_to "IR A INICIO", homepage_index_path()%></h2>
+
+
+

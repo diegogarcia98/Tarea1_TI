@@ -1,0 +1,19 @@
+<%= form_tag "/search" do%>
+      <%= text_field_tag :keyword, params[:keyword]%>
+      <%= submit_tag "Buscar", :name => nil%>
+<% end %>
+
+</div>
+    <% if @characters.length() > 0 %>
+        <h2>RESULTADOS RELACIONADOS CON: "<%=@name%>"</h2>
+        <%@characters.each do |character|%>
+            <% @change_format= character["name"].gsub ' ', '+' %>
+            <% @change_format= @change_format + '-' %>
+            <%= button_to "#{character["name"]}" , personaje_path(@change_format) %>
+        <%end%>                         
+    <% else%>
+        <h1> NO EXISTE NOMBRE DE PERSONAJE INGRESADO, INTENTE NUEVAMENTE.</h1>
+    <% end%>
+</div>
+
+<h2><%= button_to "IR A INICIO", homepage_index_path()%></h2>

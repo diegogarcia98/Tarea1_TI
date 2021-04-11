@@ -1,0 +1,27 @@
+<%= form_tag "/search" do%>
+      <%= text_field_tag :keyword, params[:keyword]%>
+      <%= submit_tag "Buscar", :name => nil%>
+<% end %>
+
+</div>
+    <% if @serie == "bb" %>
+        <h1>EPISODIOS TEMPORADA <%=@season%> DE BREAKING BAD</h1>
+
+        <% @result.each do |element| %>
+            <% if element["season"] == @season && element["series"] == "Breaking Bad" %>
+                <%= button_to "EPISODIO #{element["episode"]}: #{element["title"]}" , episodio_bb_path(element["episode"], @season, @serie)%>            
+            <%end%>
+            
+        <% end %>
+    <% elsif @serie == "bcs" %>
+        <h1>EPISODIOS TEMPORADA <%=@season%> DE BETTER CALL SAUL</h1>
+        <% @result.each do |element| %>
+            <% if element["season"] == @season && element["series"] == "Better Call Saul" %>
+                <%= button_to "EPISODIO #{element["episode"]}: #{element["title"]}", episodio_bcs_path(element["episode"], @season, @serie)%>              
+            <%end%>
+            
+        <% end %>
+    <% end %>
+</div>
+
+<h2><%= button_to "IR A INICIO", homepage_index_path()%></h2>

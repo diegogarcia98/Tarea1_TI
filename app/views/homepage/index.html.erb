@@ -1,0 +1,25 @@
+<%= form_tag "/search" do%>
+      <%= text_field_tag :keyword, params[:keyword]%>
+      <%= submit_tag "Buscar", :name => nil%>
+<% end %>
+
+
+
+<div class="container">
+      <h1 class="title"> SERIES Y TEMPORADAS DISPONIBLES </h1>
+</div>
+<div class="container">
+      <h1 class="title"> BREAKING BAD </h1>
+</div>
+<% @seasons_bb.each do |season| %>
+    <%= button_to "Temporada #{season.to_s}", episodios_bb_path(season, @series[0])%>
+<% end %>
+
+<div class="container">
+      <h1 class="title"> BETTER CALL SAUL </h1>
+</div>
+<% @seasons_bcs.each do |season| %>
+    <%= button_to "Temporada #{season.to_s}" , episodios_bcs_path(season, @series[1])%>
+<% end %>
+
+

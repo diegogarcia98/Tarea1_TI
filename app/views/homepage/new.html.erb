@@ -1,0 +1,42 @@
+<%= form_tag "/search" do%>
+      <%= text_field_tag :keyword, params[:keyword]%>
+      <%= submit_tag "Buscar", :name => nil%>
+<% end %>
+
+</div>
+    <% if @serie == "bb" %>
+        <h1>EPISODIO <%=@chapter%> DE LA TEMPORADA <%=@season%> DE BREAKING BAD</h1>
+
+        <% @result.each do |element| %>
+            <% if element["season"] == @season && element["series"] == "Breaking Bad" && element["episode"].to_s == @chapter%>
+                <h2>TÍTULO: <%=element["title"]%></h2>
+                <h2>FECHA DE TRANSMISIÓN: <%=Date.parse(element["air_date"]).strftime("%d/%m/%Y")%></h2>
+                <h2>PERSONAJES:</h2>
+                <%element["characters"].each do |character|%>
+                    <% @change_format= character.gsub ' ', '+' %>
+                    <% @change_format= @change_format + '-' %>
+                    <%= button_to "#{character}" , personaje_path(@change_format) %>
+                <%end%>           
+            <%end%>
+            
+        <% end %>
+    <% elsif @serie == "bcs" %>
+        <h1>EPISODIO <%=@chapter%> DE LA TEMPORADA <%=@season%> DE BETTER CALL SAUL</h1>
+        <% @result.each do |element| %>
+            <% if element["season"] == @season && element["series"] == "Better Call Saul" && element["episode"].to_s == @chapter%>
+                <h2>TÍTULO: <%=element["title"]%></h2>
+                <h2>FECHA DE TRANSMISIÓN: <%=Date.parse(element["air_date"]).strftime("%d/%m/%Y")%></h2>
+                <h2>PERSONAJES:</h2>
+                <%element["characters"].each do |character|%>
+                    <% @change_format= character.gsub ' ', '+' %>
+                    <% @change_format= @change_format + '-' %>
+                    <%= button_to "#{character}" , personaje_path(@change_format) %>
+                <%end%>                         
+            <%end%>
+            
+        <% end %>
+    <% end %>
+</div>
+
+<h2><%= button_to "IR A INICIO", homepage_index_path()%></h2>
+
